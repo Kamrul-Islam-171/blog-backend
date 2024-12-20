@@ -1,8 +1,5 @@
 // const express = require('express')
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Request, Response } from "express";
 import express from "express";
 import cors from "cors";
