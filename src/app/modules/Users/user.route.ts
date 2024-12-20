@@ -5,8 +5,7 @@ import ValidateRequest from '../../middlewares/validateRequests';
 import { UserValidation } from './user.validation';
 const router = express.Router();
 
-// router.post('/create-user', ValidateRequest(UserValidation.createUserValidation), UserController.createUser);
-router.post('/create-user', UserController.createUser);
+router.post('/create-user', ValidateRequest(UserValidation.createUserValidation), UserController.createUser);
 
 
 export const UserRoutes = router;
