@@ -1,3 +1,4 @@
+import { Model } from "mongoose";
 
 export type TRole  = 'admin' | 'user';
 
@@ -8,3 +9,8 @@ export interface TUser {
     role: "admin" | "user";
     isBlocked: boolean;
 }
+
+export interface UserStaticModel extends Model<TUser> {
+    isUserExists(id:string): Promise<TUser>;  
+}
+  
