@@ -18,7 +18,31 @@ const createBlogIntoDB = async(payload: TBlog) => {
     return res;
 }
 
+const updateBlogIntoDB = async(id: string, payload: Partial<TBlog>) => {
+    // first check if this id is exist
+    const isBlogExists = await Blog.findById(id);
+    
+    if(!isBlogExists) {
+        throw new AppError(httpStatus.NOT_FOUND, "Blog is not found!");
+    }
+    const res = await Blog.findByIdAndUpdate(id, payload, {new: true}).populate('author');
+    return res;
+}
+
+const deleteBlogFromDB = async(id: string) => {
+    // first check if this id is exist
+    const isBlogExists = await Blog.findById(id);
+    
+    if(!isBlogExists) {
+        throw new AppError(httpStatus.NOT_FOUND, "Blog is not found!");
+    }
+    const res = await Blog.findByIdAndDelete(id);
+    return res;
+}
+
 export const blogService = {
-    createBlogIntoDB
+    createBlogIntoDB,
+    updateBlogIntoDB,
+    deleteBlogFromDB
 }
 

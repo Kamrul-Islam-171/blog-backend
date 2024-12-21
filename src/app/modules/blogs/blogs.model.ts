@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 import { TBlog } from "./blogs.interface";
-import { User } from "../Users/user.model";
+
 
 
 const blogSchema = new Schema<TBlog>({

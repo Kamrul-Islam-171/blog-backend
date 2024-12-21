@@ -14,7 +14,8 @@ const UserSchema = new Schema<TUser, UserStaticModel>({
     }, 
     password : {
         type:String,
-        required: true
+        required: true,
+        select: 0
     },
     role : {
         type: String,

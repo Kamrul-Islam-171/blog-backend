@@ -8,5 +8,8 @@ const router = express.Router();
 
 router.post('/create-blog', ValidateRequest(blogValidation.createBlogValidation), BlogController.createBlog);
 
+router.patch('/:id', ValidateRequest(blogValidation.updateBlogValidation), BlogController.updateBlog);
+
+router.delete('/:id', BlogController.deleteBlog );
 
 export const BlogsRoute = router;
