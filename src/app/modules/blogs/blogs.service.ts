@@ -5,6 +5,9 @@ import { TBlog } from "./blogs.interface"
 import { Blog } from "./blogs.model"
 import AppError from "../../errors/AppError";
 import httpStatus from "http-status";
+import QueryBuilder from "../../builder/QueryBuilder";
+import { blogSearchAbleField } from "./blogs.constant";
+// import { blogSearchAbleField } from "./blogs.constant";
 
 const createBlogIntoDB = async(payload: TBlog) => {
 
@@ -40,9 +43,18 @@ const deleteBlogFromDB = async(id: string) => {
     return res;
 }
 
+const getAllBlogs = async(query: Record<string, unknown>) => {
+    // console.log(query)
+    const blogQuery = new QueryBuilder(Blog.find(), query).search(blogSearchAbleField).filter().sort().sortOrder();
+
+    const res = await blogQuery.modelQuery;
+    return res;
+}
+
 export const blogService = {
     createBlogIntoDB,
     updateBlogIntoDB,
-    deleteBlogFromDB
+    deleteBlogFromDB,
+    getAllBlogs
 }
 
