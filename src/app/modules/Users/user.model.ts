@@ -37,4 +37,12 @@ UserSchema.pre('save', async function (next) {
 UserSchema.statics.isUserExists = async function(id: string) {
     return await User.findById(id);
 }
+
+UserSchema.statics.isUserExistsByEmail = async function(email: string) {
+    return await User.findOne({email}).select("+password");
+}
+
+UserSchema.statics.isPasswordMaatched = async function (plainTextPass, hashedPass) {
+    return await bcrypt.compare(plainTextPass,hashedPass);
+} 
 export const User = model<TUser, UserStaticModel>('User', UserSchema);

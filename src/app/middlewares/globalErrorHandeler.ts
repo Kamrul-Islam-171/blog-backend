@@ -48,6 +48,7 @@ const globalErrorHandler = (err: any, req: Request, res: Response, next: NextFun
         errorSources = simplifiedError?.errorSources;
       }
       else if(err instanceof AppError) {
+        // console.log(err.name)
         
         statusCode = err?.statusCode;
         message = err?.message;
@@ -60,6 +61,7 @@ const globalErrorHandler = (err: any, req: Request, res: Response, next: NextFun
         // ei error k sobar last e hangle korte hobe. na hole sob err er to Error er moddhe pore tai agei ei if block e dhukbe
       
         message = err?.message;
+        // console.log(err.name)
         errorSources = [{
           path: '',
           message: err?.message
@@ -69,6 +71,7 @@ const globalErrorHandler = (err: any, req: Request, res: Response, next: NextFun
     res.status(statusCode).json({
         success: false,
         message,
+        // error: err,
         errorSources,
         stack: config.NODE_ENV === 'development' ? err.stack: null,
     })

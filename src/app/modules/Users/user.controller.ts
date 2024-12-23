@@ -6,12 +6,16 @@ import { UserService } from "./user.service";
 const createUser = catchAsync(async(req, res) => {
 
     const result = await UserService.createUserIngoDB(req.body)
-
+    const {_id, email, name} = result;
     sendResponse(res, {
-        statusCode: httpStatus.OK,
+        statusCode: httpStatus.CREATED,
         success: true,
-        message: 'User Is created successfully',
-        data: result
+        message: 'User registered successfully',
+        data: {
+            _id,
+            name,
+            email
+        }
     })
 })
 
