@@ -1,12 +1,62 @@
-eslint and pretter setup blog
+# Blogging Platform Backend
 
-https://dev.to/shafayat/-express-typescript-eslint-prettiersetup-5fhg?fbclid=IwY2xjawGuijdleHRuA2FlbQIxMAABHdid5LBojE340vO0MGfo5QiUeLLNXeN7L2L79ngf63F3-UJpYgFn-5quoA_aem_YQ0-vmhWKv38TWlBWIB5PQ
+## Overview
+
+This project involves the development of a backend for a blogging platform. Users can create, update, and delete their own blogs, while an Admin has extended permissions to manage users and their blogs. The system includes secure authentication, role-based access control, and public APIs for accessing blogs with search, sort, and filter functionalities.
+
+---
+
+## Features
+
+### User Roles
+
+#### Admin
+- Permissions:
+  - Delete any blog.
+  - Block any user.
+- Restrictions:
+  - Cannot update any blog.
+
+#### User
+- Permissions:
+  - Register and log in.
+  - Create blogs (only when logged in).
+  - Update and delete their own blogs.
+- Restrictions:
+  - Cannot perform admin-specific actions.
+
+---
+
+### Authentication & Authorization
+- **Authentication:**
+  - Users must log in to perform create, update, and delete operations.
+- **Authorization:**
+  - Role-based access control ensures users and admins can perform actions within their permissions.
+
+---
+
+### Blog Management
+- Users can:
+  - Create new blogs.
+  - Update and delete blogs they own.
+- Admins can:
+  - Delete any blog.
+
+---
 
 
-install express, mongoose, cors, dotenv
+## Technologies
 
-create .env and set env_variable( PORT, DATABASE_URL)
+- **TypeScript**: For type-safe coding.
+- **Node.js**: As the runtime environment.
+- **Express.js**: For building RESTful APIs.
+- **MongoDB** with **Mongoose**: For database management.
 
+---
 
-PORT=5000
-DATABASE_URL=mongodb+srv://<db_username>:<db_Pass>su@cluster0.insvee7.mongodb.net/<database-name>?retryWrites=true&w=majority&appName=Cluster0
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Kamrul-Islam-171/blog-backend
+   cd blog-backend
