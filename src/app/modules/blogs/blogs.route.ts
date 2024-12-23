@@ -7,7 +7,7 @@ import Auth from '../../middlewares/auth';
 
 const router = express.Router();
 
-router.post('/create-blog', ValidateRequest(blogValidation.createBlogValidation), BlogController.createBlog);
+router.post('/create-blog',Auth('user'), ValidateRequest(blogValidation.createBlogValidation), BlogController.createBlog);
 
 router.patch('/:id', ValidateRequest(blogValidation.updateBlogValidation), BlogController.updateBlog);
 

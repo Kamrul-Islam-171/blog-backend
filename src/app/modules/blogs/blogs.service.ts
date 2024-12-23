@@ -9,16 +9,20 @@ import QueryBuilder from "../../builder/QueryBuilder";
 import { blogSearchAbleField } from "./blogs.constant";
 // import { blogSearchAbleField } from "./blogs.constant";
 
-const createBlogIntoDB = async(payload: TBlog) => {
+const createBlogIntoDB = async(payload: TBlog, email:string) => {
 
-    const id: Types.ObjectId = new Types.ObjectId(payload.author)
-    const user = await User.isUserExists(id.toString());
-
+    // const id: Types.ObjectId = new Types.ObjectId(payload.author)
+    // const user = await User.isUserExists(id.toString());
+    const user = await User.findOne({email});
+    const id: Types.ObjectId = new Types.ObjectId(user?._id)
+    payload.author = id;
+    console.log(payload)
     if(!user) {
         throw new AppError(httpStatus.NOT_FOUND, "User is not found")
     }
     const res = await Blog.create(payload);
     return res;
+    return null;
 }
 
 const updateBlogIntoDB = async(id: string, payload: Partial<TBlog>) => {

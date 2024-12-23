@@ -30,7 +30,7 @@ const loginUser = async(paylod:TLoginUser) => {
 
     const accessToken = createToken(jwtPayload, config.access_secret as string, config.access_expire as string);
     // console.log(accessToken)
-    return {accessToken};
+    return {token: accessToken};
     
 
 
