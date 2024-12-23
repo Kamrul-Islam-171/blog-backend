@@ -11,7 +11,7 @@ router.post('/create-blog',Auth('user'), ValidateRequest(blogValidation.createBl
 
 router.patch('/:id', Auth('user'), ValidateRequest(blogValidation.updateBlogValidation), BlogController.updateBlog);
 
-router.delete('/:id', BlogController.deleteBlog );
+router.delete('/:id',Auth('user'), BlogController.deleteBlog );
 router.get('/',Auth('user'), BlogController.getBlogs );
 
 export const BlogsRoute = router;

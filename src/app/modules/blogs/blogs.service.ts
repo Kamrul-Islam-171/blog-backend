@@ -41,13 +41,19 @@ const updateBlogIntoDB = async(id: string, payload: Partial<TBlog>, email:string
     return res;
 }
 
-const deleteBlogFromDB = async(id: string) => {
+const deleteBlogFromDB = async(id: string, email: string) => {
     // first check if this id is exist
     const isBlogExists = await Blog.findById(id);
     
     if(!isBlogExists) {
         throw new AppError(httpStatus.NOT_FOUND, "Blog is not found!");
     }
+
+    const user = await User.findById(isBlogExists.author);
+    if(email !== user?.email) {
+        throw new AppError(httpStatus.UNAUTHORIZED, "You are Unathorized to Delete !!")
+    }
+
     const res = await Blog.findByIdAndDelete(id);
     return res;
 }
