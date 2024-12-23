@@ -1,5 +1,7 @@
 # Blogging Platform Backend
 
+live link (https://blog-backend-l2-a3.vercel.app/)
+
 ## Overview
 
 This project involves the development of a backend for a blogging platform. Users can create, update, and delete their own blogs, while an Admin has extended permissions to manage users and their blogs. The system includes secure authentication, role-based access control, and public APIs for accessing blogs with search, sort, and filter functionalities.
