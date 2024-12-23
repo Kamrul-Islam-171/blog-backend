@@ -60,3 +60,18 @@ This project involves the development of a backend for a blogging platform. User
    ```bash
    git clone https://github.com/Kamrul-Islam-171/blog-backend
    cd blog-backend
+
+   ## Installation
+
+### Install dependencies:
+```bash
+npm install
+
+### Set up environment variables:
+1. Create a `.env` file in the root directory.
+2. Define the following variables:
+   ```env
+   PORT=5000
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+
