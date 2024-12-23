@@ -62,10 +62,25 @@ const getBlogs = catchAsync(async(req, res) => {
     })
 })
 
+const adminDeleteBlog = catchAsync(async(req, res) => {
+    const {id} = req.params;
+    await blogService.deleteBlogByAdmin(id)
+  
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Blog deleted successfully',
+        data: {
+           
+        }
+    })
+})
+
 
 export const BlogController = {
     createBlog,
     updateBlog,
     deleteBlog,
-    getBlogs
+    getBlogs,
+    adminDeleteBlog
 }

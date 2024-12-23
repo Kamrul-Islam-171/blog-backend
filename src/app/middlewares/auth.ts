@@ -9,9 +9,12 @@ import { User } from "../modules/Users/user.model";
 import httpStatus from "http-status";
 const Auth = (...requiredRole: TUserRole[]) => {
     return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-      // console.log('Hell = ',req.headers.authorization );
-      // console.log('Hell = ',req.headers.Authorization);
-      const token = req.headers.authorization;
+     
+      let token = req.headers.authorization;
+      if (token && token.startsWith('Bearer ')) {
+        token = token.split(' ')[1]; // Extract the actual token after "Bearer"
+      }
+      // console.log(token)
       if (!token) {
         throw new AppError(httpStatus.UNAUTHORIZED, "You are not Authorized!");
       }

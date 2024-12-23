@@ -66,10 +66,22 @@ const getAllBlogs = async(query: Record<string, unknown>) => {
     return res;
 }
 
+const deleteBlogByAdmin = async(id : string) => {
+    const blog = await Blog.findById(id);
+    // console.log(blog)
+    if(!blog) {
+        throw new AppError(httpStatus.NOT_FOUND, "Blog is not found!!")
+    }
+    const res = await Blog.findByIdAndDelete(id);
+    return res;
+
+}
+
 export const blogService = {
     createBlogIntoDB,
     updateBlogIntoDB,
     deleteBlogFromDB,
-    getAllBlogs
+    getAllBlogs,
+    deleteBlogByAdmin
 }
 

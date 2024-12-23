@@ -34,7 +34,10 @@ const blockUser = catchAsync(async(req, res) => {
     })
 })
 
+
+
 export const UserController = {
     createUser,
-    blockUser
+    blockUser,
+    
 }
