@@ -9,6 +9,13 @@ const createUserValidation = z.object({
     })
 })
 
+const blockUserValidation = z.object({
+    body: z.object({
+        userId:z.string().optional()
+    })
+})
+
 export const UserValidation = {
-    createUserValidation
+    createUserValidation,
+    blockUserValidation
 }

@@ -17,5 +17,9 @@ export interface UserStaticModel extends Model<TUser> {
     isPasswordMaatched(plainTextPass:string, hashedPass:string): Promise<boolean>;
 }
 
+export interface TBlockUser {
+    userId:string,
+}
+
 export type TUserRole = keyof typeof USER_ROLE;
   
