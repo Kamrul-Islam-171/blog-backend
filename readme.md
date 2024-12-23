@@ -75,3 +75,34 @@ npm install
    MONGO_URI=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret
 
+```
+
+# API Endpoints
+
+## Authentication
+
+- **POST /api/auth/register**  
+  Register a new user.
+
+- **POST /api/auth/login**  
+  Log in and receive a token.
+
+## User Management (Admin Only)
+
+- **PATCH /api/admin/users/:userId/block**  
+  Block a user.
+
+- **DELETE /api/admin/blogs/:id**  
+  Delete a user.
+
+## Blog Management
+
+- **GET /api/blogs**  
+  Public API to view blogs with search, sort, and filter functionalities.
+
+- **POST /api/blogs**  
+  Create a new blog (requires authentication).
+
+- **PATCH /api/blogs/:id**  
+  Update
+
