@@ -17,7 +17,7 @@ const HandleMongooseError = (err: mongoose.Error.ValidationError) : TGenericErro
     return {
         
         statusCode,
-        message: 'Mongoose Validation Error!!',
+        message: 'Validation Error!!',
         errorSources
     }
 }

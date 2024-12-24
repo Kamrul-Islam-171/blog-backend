@@ -7,11 +7,11 @@ import Auth from '../../middlewares/auth';
 
 const router = express.Router();
 
-router.post('/create-blog',Auth('user'), ValidateRequest(blogValidation.createBlogValidation), BlogController.createBlog);
+router.post('/',Auth('user'), ValidateRequest(blogValidation.createBlogValidation), BlogController.createBlog);
 
 router.patch('/:id', Auth('user'), ValidateRequest(blogValidation.updateBlogValidation), BlogController.updateBlog);
 
 router.delete('/:id',Auth('user'), BlogController.deleteBlog );
-router.get('/',Auth('user'), BlogController.getBlogs );
+router.get('/', BlogController.getBlogs );
 
 export const BlogsRoute = router;

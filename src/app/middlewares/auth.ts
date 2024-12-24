@@ -11,6 +11,7 @@ const Auth = (...requiredRole: TUserRole[]) => {
     return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
      
       let token = req.headers.authorization;
+      // console.log("token = ",token)
       if (token && token.startsWith('Bearer ')) {
         token = token.split(' ')[1]; // Extract the actual token after "Bearer"
       }
@@ -25,7 +26,7 @@ const Auth = (...requiredRole: TUserRole[]) => {
         config.access_secret as string
       ) as JwtPayload;
   
-    //   console.log(decoded)
+      // console.log(decoded)
   
       const {role, email, iat} = decoded;
   

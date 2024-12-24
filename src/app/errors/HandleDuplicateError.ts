@@ -16,7 +16,7 @@ const HandleDuplicateError = (err: any): TGenericErrorResponse => {
 
   return {
     statusCode,
-    message: "Duplicate info",
+    message: "Validation Error",
     errorSources,
   };
 };
