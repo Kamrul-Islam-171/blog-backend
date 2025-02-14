@@ -10,12 +10,12 @@ import httpStatus from "http-status";
 const Auth = (...requiredRole: TUserRole[]) => {
     return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
      
-      let token = req.headers.authorization;
+      const token = req.headers.authorization;
       // console.log("token = ",token)
-      if (token && token.startsWith('Bearer ')) {
-        token = token.split(' ')[1]; // Extract the actual token after "Bearer"
-      }
-      // console.log(token)
+      // if (token && token.startsWith('Bearer ')) {
+      //   token = token.split(' ')[1]; // Extract the actual token after "Bearer"
+      // }
+      
       if (!token) {
         throw new AppError(httpStatus.UNAUTHORIZED, "You are not Authorized!");
       }

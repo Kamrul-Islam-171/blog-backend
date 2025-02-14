@@ -53,6 +53,7 @@ const getBlogs = catchAsync(async(req, res) => {
 
     // console.log({'req.user': req.user});
     const result = await blogService.getAllBlogs(req.query);
+    // console.log(req.cookies)
     
 
     sendResponse(res, {

@@ -19,8 +19,8 @@ const UserSchema = new Schema<TUser, UserStaticModel>({
     },
     role : {
         type: String,
-        enum: ["admin", "user"],
-        default: "user"
+        enum: ["admin", "customer"],
+        default: "customer"
     },
     isBlocked: {
         type: Boolean,

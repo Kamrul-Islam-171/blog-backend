@@ -19,18 +19,30 @@ const createUser = catchAsync(async(req, res) => {
     })
 })
 
-const blockUser = catchAsync(async(req, res) => {
+const unblockBlockUser = catchAsync(async(req, res) => {
     const {userId} = req.params;
-    await UserService.blockUser(userId)
-    // console.log(req.params)
-    // const {_id, email, name} = result;
+    const query = req.query;
+    await UserService.blockUnblockUser(userId, query);
+    // console.log(query)
+  
     sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
-        message: 'User blocked successfully',
+        message: `User ${query?.isBlock === 'true' ? 'blocked' : 'unblocked'} successfully`,
         data: {
            
         }
+    })
+})
+const getAllCustomers = catchAsync(async(req, res) => {
+    const query = req.query;
+    
+    const result = await UserService.getAllUsersFromDB(query);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'User retrives successfully',
+        data: result
     })
 })
 
@@ -38,6 +50,7 @@ const blockUser = catchAsync(async(req, res) => {
 
 export const UserController = {
     createUser,
-    blockUser,
+    unblockBlockUser,
+    getAllCustomers
     
 }

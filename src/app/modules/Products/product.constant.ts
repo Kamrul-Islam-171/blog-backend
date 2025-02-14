@@ -1,0 +1,1 @@
+export const ProductSearchAbleFields = ['category', 'name', 'brand']
