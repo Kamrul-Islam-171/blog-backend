@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import config from "../config";
 import AppError from "../errors/AppError";
-import { TUserRole } from "../modules/Users/user.interface";
+
 import catchAsync from "../utils/catchAsync";
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { User } from "../modules/Users/user.model";
 import httpStatus from "http-status";
+import { TUserRole } from "../modules/Users/user.interface";
 const Auth = (...requiredRole: TUserRole[]) => {
     return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
      

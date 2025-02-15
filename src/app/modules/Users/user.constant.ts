@@ -5,7 +5,7 @@ export const Role: TRole[] = ['admin', 'customer'];
 
 export const USER_ROLE = {
 
-    user : 'customer',
+    customer : 'customer',
     admin: 'admin'
 } as const;
 

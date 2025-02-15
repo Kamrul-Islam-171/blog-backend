@@ -4,6 +4,8 @@ import { User } from './user.model';
 import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
 import QueryBuilder from '../../builder/QueryBuilder';
+import { JwtPayload } from 'jsonwebtoken';
+import  bcrypt  from 'bcrypt';
 const createUserIngoDB = async (payload: TUser) => {
   const res = await User.create(payload);
   return res;
@@ -16,6 +18,10 @@ const getAllUsersFromDB = async (query: Record<string, unknown>) => {
     meta,
     result,
   };
+};
+const getSingleUsersFromDB = async (email:string) => {
+  const result = await User.findOne({email});
+  return result;
 };
 
 const blockUnblockUser = async (id: string, query: Record<string, unknown>) => {
@@ -34,8 +40,64 @@ const blockUnblockUser = async (id: string, query: Record<string, unknown>) => {
   });
   return res;
 };
+
+const changePassword = async (
+  userData: JwtPayload,
+  payload: { oldPassword: string; newPassword: string }
+) => {
+  // console.log(userData)
+  const {email} = userData;
+  const user = await User.findOne({email}).select("email password isBlocked role"); // because in user.model.ts i used return await User.findOne({email}).select("+password");
+  // console.log(user)
+
+  // const user = await User.isUserExistsByCustomID(userData?.id);
+
+
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, "User is not found!");
+  }
+
+  // const isUserDeleted = user?.isDeleted;
+  // if (isUserDeleted) {
+  //   throw new AppError(httpStatus.FORBIDDEN, "User is Deleted!");
+  // }
+
+
+  const userStauts = user?.isBlocked;
+  if (userStauts) {
+    throw new AppError(httpStatus.FORBIDDEN, "User is blocked!");
+  }
+
+
+
+
+  const isPasswordMatched = await User.isPasswordMaatched(
+    payload?.oldPassword,
+    user?.password
+  );
+  if (!isPasswordMatched) {
+    throw new AppError(httpStatus.FORBIDDEN, "Password does not match");
+  }
+
+
+  const newHashedPass = await bcrypt.hash(payload?.newPassword, 12);
+
+  await User.findOneAndUpdate(
+    { email: userData.email, role: userData.role },
+    {
+      password: newHashedPass,
+      needsPasswordChange: false,
+      passwordChangeAt: new Date(),
+    }
+  );
+
+  return null; // pass pathano jabe na. tai null
+};
+
 export const UserService = {
   createUserIngoDB,
   blockUnblockUser,
   getAllUsersFromDB,
+  getSingleUsersFromDB,
+  changePassword
 };

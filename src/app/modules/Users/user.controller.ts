@@ -45,12 +45,40 @@ const getAllCustomers = catchAsync(async(req, res) => {
         data: result
     })
 })
+const getSingleCustomer = catchAsync(async(req, res) => {
+    const {email} = req.params;
+    
+    const result = await UserService.getSingleUsersFromDB(email);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'User retrives successfully',
+        data: result
+    })
+})
+
+const changePassword = catchAsync(async(req, res) => {
+    
+    // console.log(req.user, req.body);
+    
+    const {...passwordData} = req.body;
+    const result = await UserService.changePassword(req.user, passwordData);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Password changed successfully',
+        data: {}
+        // data: null
+    })
+})
 
 
 
 export const UserController = {
     createUser,
     unblockBlockUser,
-    getAllCustomers
+    getAllCustomers,
+    getSingleCustomer,
+    changePassword
     
 }

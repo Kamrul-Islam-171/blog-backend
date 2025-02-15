@@ -14,6 +14,7 @@ router.post(
   productControler.createProduct,
 );
 router.get('/get-all-products', productControler.getAllBikes);
+router.get('/:productId', productControler.getProduct);
 router.patch('/:productId', productControler.updateProduct);
 // router.put('/:productId', productControler.updateProduct);
 router.delete('/:productId', productControler.deleteProduct);

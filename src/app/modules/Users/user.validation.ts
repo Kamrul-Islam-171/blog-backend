@@ -9,6 +9,14 @@ const createUserValidation = z.object({
     })
 })
 
+const changePasswordValidationSchema = z.object({
+    body : z.object({
+        
+        oldPassword:z.string({required_error:"oldPassword is required !"}),
+        newPassword:z.string({required_error:"newPassword is required !"})
+    })
+})
+
 const blockUserValidation = z.object({
     body: z.object({
         userId:z.string().optional()
@@ -17,5 +25,6 @@ const blockUserValidation = z.object({
 
 export const UserValidation = {
     createUserValidation,
-    blockUserValidation
+    blockUserValidation,
+    changePasswordValidationSchema
 }
