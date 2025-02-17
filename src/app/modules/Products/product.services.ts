@@ -3,6 +3,7 @@ import { Product } from './product.interface';
 import { ProductModel } from './product.model';
 import QueryBuilder from '../../builder/QueryBuilder';
 import { ProductSearchAbleFields } from './product.constant';
+import { OrderModel } from '../payment/payment.model';
 
 const createProductIntoDB = async (product: Product) => {
   const result = await ProductModel.create(product);
@@ -18,6 +19,32 @@ const getAllBikesFromDB = async (query: Record<string, unknown>) => {
     .fieldsLimiting();
   const result = await productQuery.modelQuery;
   const meta = await productQuery.countTotal();
+  return {
+    meta,
+    result,
+  };
+};
+
+const getOrdersByEmailFromDB = async (query: Record<string, unknown>) => {
+
+  // here populate('product') e product is the field from orderModel
+  const orderQuery = new QueryBuilder(OrderModel.find({status:'success'}).populate('product'), query)
+  .filter()
+    .paginate()
+    .fieldsLimiting();
+  const result = await orderQuery.modelQuery;
+  const meta = await orderQuery.countTotal();
+  return {
+    meta,
+    result,
+  };
+};
+const getOrdersFromDB = async (query: Record<string, unknown>) => {
+  const orderQuery = new QueryBuilder(OrderModel.find(), query)
+    .paginate()
+    .fieldsLimiting();
+  const result = await orderQuery.modelQuery;
+  const meta = await orderQuery.countTotal();
   return {
     meta,
     result,
@@ -56,4 +83,6 @@ export const productService = {
   getSingleBikeFromDB,
   updateProductIntoDB,
   deleteProductFromDB,
+  getOrdersByEmailFromDB,
+  getOrdersFromDB
 };

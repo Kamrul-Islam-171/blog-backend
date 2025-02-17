@@ -2,12 +2,13 @@ import config from '../../config';
 import AppError from '../../errors/AppError';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { OrderModel } from './payment.model';
+// import { OrderModel } from './payment.model';
 import { orderService } from './payment.service';
 import httpStatus from 'http-status';
 
 const createOrder = catchAsync(async (req, res) => {
   const info = req.body;
+
 
   const ressult = await orderService.createPaymentIntoDB(info);
   //   console.log(ressult)
@@ -27,7 +28,7 @@ const successPayment = catchAsync(async (req, res) => {
     throw new AppError(httpStatus.BAD_REQUEST, 'Invalid Payment');
   }
 
-  const result = await orderService.successOrder(successInfo?.tran_id, successInfo)
+  await orderService.successOrder(successInfo?.tran_id, successInfo)
 
   // await OrderModel.findOneAndUpdate(
   //   { payment_id: successInfo?.tran_id }, 

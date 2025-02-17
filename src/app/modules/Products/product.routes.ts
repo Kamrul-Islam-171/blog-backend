@@ -19,4 +19,11 @@ router.patch('/:productId', productControler.updateProduct);
 // router.put('/:productId', productControler.updateProduct);
 router.delete('/:productId', productControler.deleteProduct);
 
+
+//orders
+router.get('/orders/all-products', productControler.getOrderByEmail)
+router.get('/order/all-orders', productControler.getAllOrder)
+
+
+
 export const ProductRoutes = router;

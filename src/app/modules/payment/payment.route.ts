@@ -1,12 +1,14 @@
 import express from 'express';
 
 import { orderController } from './payment.controller';
+import Auth from '../../middlewares/auth';
 
 const router = express.Router();
 
 router.post(
   '/create-payment',
 //   ValidateRequest(orderValidation.orderValidationSchema),
+  Auth('customer'),
   orderController.createOrder,
 );
 router.post(

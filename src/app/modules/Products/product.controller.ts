@@ -120,6 +120,31 @@ const deleteProduct = async (req: Request, res: Response) => {
   }
 };
 
+const getOrderByEmail = catchAsync(async (req, res) => {
+  // const email = req.params.email;
+  // console.log(req.query)
+  
+  const result = await productService.getOrdersByEmailFromDB(req.query);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: `Orders Retrive successfully`,
+    data: result,
+  });
+});
+const getAllOrder = catchAsync(async (req, res) => {
+  
+  // console.log("i am in")
+  const result = await productService.getOrdersFromDB(req.query);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: `Orders Retrive successfully`,
+    data: result,
+  });
+});
+
+
 export const productControler = {
   createProduct,
   getAllBikes,
@@ -127,4 +152,7 @@ export const productControler = {
   updateProduct,
   deleteProduct,
   getProduct,
+  getOrderByEmail,
+  getAllOrder,
+ 
 };

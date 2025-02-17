@@ -13,6 +13,9 @@ type TOrder = {
   email: string;
   address: string;
   productId: string;
+  paymentMethod:string;
+  totalPrice: number;
+
 };
 
 const createPaymentIntoDB = async (product: TOrder) => {
@@ -20,13 +23,25 @@ const createPaymentIntoDB = async (product: TOrder) => {
     _id: new mongoose.Types.ObjectId(product?.productId),
   });
 
+
+  // console.log(product);
+  // if(product.paymentMethod === 'BDT') {
+  //   productInfo.price = productInfo.price * 100;
+  // }
+  let total = productInfo?.price;
+  if(product.paymentMethod === 'BDT') {
+    total = parseInt((Number(total) * 83.18).toString());
+  }
+
   const transactionId = new ObjectId().toString(); // shoulbe be unique
 
   const initialData = {
     store_id: config.store_id,
     store_passwd: config.store_pass,
-    total_amount: productInfo?.price, // this price should be calculated and get from backend for security purpose
-    currency: 'BDT',
+    // total_amount: productInfo?.price, // this price should be calculated and get from backend for security purpose
+    // total_amount: product?.totalPrice, 
+    total_amount: total, // this price should be calculated and get from backend for security purpose
+    currency: product?.paymentMethod,
     tran_id: transactionId, // use unique tran_id for each api call
     // success_url: 'http://localhost:5000/api/orders/success-payment',
     success_url: `${config.back_end_url}/api/orders/success-payment`, // backend e ei route thaka lagbe
@@ -67,6 +82,7 @@ const createPaymentIntoDB = async (product: TOrder) => {
       },
     },
   );
+  // console.log(response)
 
   // if (!response.data?.GatewayPageURL) {
   //   throw new AppError(
