@@ -13,5 +13,9 @@ export default {
     refresh_secret: process.env.JWT_REFRESH_SECRET,
     access_expire:process.env.JWT_ACCESS_EXPIRES,
     refresh_expire:process.env.JWT_REFRESH_EXPIRES,
+    front_end_url:process.env.FURL,
+    back_end_url:process.env.BURL,
+    store_id:process.env.STORE_ID,
+    store_pass:process.env.STORE_PASS,
 };
   
