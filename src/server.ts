@@ -14,7 +14,7 @@ async function main() {
     await mongoose.connect(config.db_url as string);
 
     server = app.listen(config.port, () => {
-      console.log(`blog backend listening on port ${config.port}`);
+      console.log(`Bike store listening on port ${config.port}`);
     });
   } catch (error) {
     console.log(error);

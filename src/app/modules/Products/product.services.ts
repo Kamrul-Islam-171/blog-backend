@@ -40,7 +40,7 @@ const getOrdersByEmailFromDB = async (query: Record<string, unknown>) => {
   };
 };
 const getOrdersFromDB = async (query: Record<string, unknown>) => {
-  const orderQuery = new QueryBuilder(OrderModel.find(), query)
+  const orderQuery = new QueryBuilder(OrderModel.find({status:'success'}).populate('product'), query)
     .paginate()
     .fieldsLimiting();
   const result = await orderQuery.modelQuery;
